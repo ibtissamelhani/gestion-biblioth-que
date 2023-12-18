@@ -9,7 +9,8 @@ $dotenv->load();
 
 
 
- class connection {
+ class connection
+  {
 
     public static function connect(){
        
