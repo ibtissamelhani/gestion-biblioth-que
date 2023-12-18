@@ -11,8 +11,6 @@ $dotenv->load();
 
  class connection {
 
-  
- 
     public static function connect(){
        
         try{
@@ -25,8 +23,6 @@ $dotenv->load();
         }
 
     }
-
-
  }
 
 
