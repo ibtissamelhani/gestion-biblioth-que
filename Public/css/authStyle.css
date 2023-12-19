@@ -45,7 +45,7 @@ form{
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
-    top: 80%;
+    top: 70%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -61,7 +61,7 @@ form *{
     border: none;
 }
 form h3{
-    font-size: 32px;
+    font-size: 25px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
@@ -119,4 +119,9 @@ button{
 }
 .social i{
   margin-right: 4px;
+}
+
+span {
+    color: red;
+    font-size: 16px;
 }
