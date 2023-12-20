@@ -127,6 +127,17 @@ class UserController
         $userDao->creatUser($user);
     }
 
+    public function update($id,$first_name,$last_name,$email,$password,$phone) {
+        $user = new User($id,$first_name,$last_name,$email,$password,$phone);
+        $userDao = new UserDao();
+        $userDao->updateUser($user);
+    }
+
+    public function delete($id){
+        $userDao = new UserDao();
+        $userDao->deleteBook($id);
+    }
+
 }
 
 
@@ -146,6 +157,20 @@ if(isset($_POST['add'])){
     $userCon = new UserController();
     extract($_POST);
     $userCon->create($first_name,$last_name,$email,$password,$phone);
+    $userCon->redirect("../../Views/admin/user/users.php");
+}
+
+if(isset($_POST['update'])){
+    $userCon = new UserController();
+    extract($_POST);
+    $userCon->update($id,$first_name,$last_name,$email,$password,$phone);
+    $userCon->redirect("../../Views/admin/user/users.php");
+}
+
+if(isset($_POST['delete'])){
+    $userCon = new userController();
+    extract($_POST);
+    $userCon->delete($id);
     $userCon->redirect("../../Views/admin/user/users.php");
 }
 

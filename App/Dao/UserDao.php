@@ -51,6 +51,35 @@ class UserDao
             return $users;
         }
     }
+
+    public function getUserById($id){
+        $query ="SELECT * from users where id=?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    public function updateUser(User $user){
+        $query = "UPDATE users 
+        set first_name= :first_name, last_name = :last_name, email= :email, password= :password, phone= :phone
+        where id= :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id', $user->getId());
+        $stmt->bindValue(':first_name', $user->getFirstName());
+        $stmt->bindValue(':last_name', $user->getLastName());
+        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':password', $user->getPassword());
+        $stmt->bindValue(':phone', $user->getphone());
+        $stmt->execute();
+    }
+
+    public function deleteBook($id){
+        $query = "DELETE from users where id=:id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
 }
 
 
