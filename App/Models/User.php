@@ -22,6 +22,9 @@ class User
     }
 
 // getters
+    public function getId(){
+        return $this->id;
+    }
     public function getFirstName(){
         return $this->first_name;
     }
@@ -43,6 +46,10 @@ class User
     }
 
 // setters
+
+    public function setId($id){
+        $this->id= $id;
+    }
     public function setFirstName($first_name){
         $this->first_name= $first_name;
     }

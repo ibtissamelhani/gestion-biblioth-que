@@ -119,6 +119,14 @@ class UserController
         header("Location: $url");
     }
 
+
+    public function create($first_name,$last_name,$email,$password,$phone){
+        $password = password_hash($password, PASSWORD_BCRYPT);
+        $userDao = new UserDao();
+        $user = new User(null,$first_name,$last_name,$email,$password,$phone);
+        $userDao->creatUser($user);
+    }
+
 }
 
 
@@ -132,6 +140,13 @@ if(isset($_POST['login'])){
     $userCon = new UserController();
     extract($_POST);
     $userCon->login($email,$password);
+}
+
+if(isset($_POST['add'])){
+    $userCon = new UserController();
+    extract($_POST);
+    $userCon->create($first_name,$last_name,$email,$password,$phone);
+    $userCon->redirect("../../Views/admin/user/users.php");
 }
 
 ?>

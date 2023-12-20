@@ -239,7 +239,7 @@ use App\Dao\BookDao;
                 <td class="px-6 py-4">
                     <?php echo $book->getAvailableCopies() ?>
                 </td>
-                <td class="px-2 py-4">
+                <td class="px-2 py-4 flex">
                 <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"><a href="EditBook.php?updateId=<?= $book->getId() ?>" class="font-medium text-white-600 dark:text-blue-500 hover:underline">Edit</a></button>
                 <form method="post" action="../../../app/Controllers/BookController.php">
                         <input type="hidden" name="id" id="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"   value="<?php echo $book->getId() ?>">

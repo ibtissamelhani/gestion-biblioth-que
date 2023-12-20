@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
-use App\Dao\BookDao;
+use App\Dao\UserDao;
 ?>
 
 
@@ -117,7 +117,7 @@ use App\Dao\BookDao;
 
 <!-- Modal toggle -->
 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m" type="button">
-  Add book
+  Add user
 </button>
 
 <!-- Main modal -->
@@ -128,7 +128,7 @@ use App\Dao\BookDao;
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Add New Book
+                    Add New User
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -138,54 +138,32 @@ use App\Dao\BookDao;
                 </button>
             </div>
             <!-- Modal body -->
-            <form method="post" action="../../../app/Controllers/BookController.php"  class="p-4 md:p-5">
+            <form method="post" action="../../../app/Controllers/UserController.php"  class="p-4 md:p-5">
                 <div class="grid gap-4 mb-4 grid-cols-2">
-                    <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tilte</label>
-                        <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="book title" required="">
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="first" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                        <input type="text" name="first_name" id="first" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">author</label>
-                        <input type="text" name="author" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="author name" required="">
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">genre</label>
-                        <select name="genre" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Adventure</option>
-                            <option value="TV">Detective & Mystery</option>
-                            <option value="PC">Historical</option>
-                            <option value="GA">Horror</option>
-                            <option value="PH">Literary</option>
-                        </select>
+                        <label for="last" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                        <input type="text" name="last_name" id="last" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                     </div>
                     <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">publication date</label>
-                        <div class="relative max-w-sm">
-                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
-                          </div>
-                          <input name="year" datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
-                        </div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
+                        <input type="email" name="email" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="book title" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="price" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white">total copies</label>
-                        <input type="number" name="total_copies" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
+                        <input type="text" name="password" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="author name" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">available copies</label>
-                        <input type="number" name="available_copies" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
-                    </div>
-
-                    <div class="col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea name="description" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>                    
+                        <label for="phone" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white">phone</label>
+                        <input type="text" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                     </div>
                 </div>
                 <button name="add" type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                    Add new book
+                    Add new user
                 </button>
             </form>
         </div>
@@ -198,19 +176,16 @@ use App\Dao\BookDao;
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Title
+                    first name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    genre
+                    last name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    author
+                    email
                 </th>
                 <th scope="col" class="px-6 py-3">
-                Total_copies
-                </th>
-                <th scope="col" class="px-6 py-3">
-                Available_copies
+                phone
                 </th>
                 <th scope="col" class="px-6 py-3">
                 Action
@@ -219,30 +194,27 @@ use App\Dao\BookDao;
         </thead>
         <tbody>
         <?php
-                $userDao = new BookDao();
-                $books = $userDao->getALLBooks();
-                foreach($books as $book){
+                $userDao = new UserDao();
+                $users = $userDao->getAllUsers();
+                foreach($users as $user){
                 ?>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <?php echo $book->getTitle() ?>
+                    <?php echo $user->getFirstName() ?>
                 </th>
                 <td class="px-6 py-4">
-                    <?php echo $book->getGenre() ?>
+                    <?php echo $user->getLastName() ?>
                 </td>
                 <td class="px-6 py-4">
-                    <?php echo $book->getAuthor() ?>
+                    <?php echo $user->getEmail() ?>
                 </td>
                 <td class="px-6 py-4">
-                    <?php echo $book->getTotalCopies() ?>
+                    <?php echo $user->getphone() ?>
                 </td>
-                <td class="px-6 py-4">
-                    <?php echo $book->getAvailableCopies() ?>
-                </td>
-                <td class="px-2 py-4">
-                <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"><a href="EditBook.php?updateId=<?= $book->getId() ?>" class="font-medium text-white-600 dark:text-blue-500 hover:underline">Edit</a></button>
+                <td class=" py-4 flex">
+                <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"><a href="EditBook.php?updateId=<?= $user->getId() ?>" class="font-medium text-white-600 dark:text-blue-500 hover:underline">Edit</a></button>
                 <form method="post" action="../../../app/Controllers/BookController.php">
-                        <input type="hidden" name="id" id="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"   value="<?php echo $book->getId() ?>">
+                        <input type="hidden" name="id" id="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"   value="<?php echo $user->getId() ?>">
                   <button name="delete" type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
                 </form>
                 </td>
