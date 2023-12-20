@@ -19,7 +19,7 @@ class UserController
         if(empty($_SESSION['nameErr']) && empty($_SESSION['emailErr']) && empty($_SESSION['passErr']) && empty($_SESSION['r_passErr'])  ){
             $password = password_hash($password, PASSWORD_BCRYPT);
             $userDao = new UserDao();
-            $user = new User($f_name,null,$email,$password,null);
+            $user = new User(null,$f_name,null,$email,$password,null);
             $userDao->creatUser($user); 
             $this->redirect("../../index.php");
         }

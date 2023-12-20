@@ -36,6 +36,21 @@ class UserDao
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    public function getAllUsers(){
+        $query = $this->conn->query("SELECT * from users");
+        $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+        $users = [];
+        if(empty($rows)){
+            return [];
+        }else{
+            foreach($rows as $row){
+                $user = new User($row['id'],$row['first_name'],$row['last_name'],$row['email'],$row['password'],$row['phone']);
+                $users[] = $user;
+            }
+            return $users;
+        }
+    }
 }
 
 
