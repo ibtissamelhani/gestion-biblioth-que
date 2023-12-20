@@ -61,6 +61,13 @@ class BookDao
         $stmt->execute();
     }
 
+    public function deleteBook($id){
+        $query = "DELETE from books where id=:id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
+
 }
 
 ?>

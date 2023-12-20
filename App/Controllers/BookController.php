@@ -20,6 +20,11 @@ class BookController
         $bookDao->updateBook($book);
     }
 
+    public function delete($id){
+        $bookDao = new BookDao();
+        $bookDao->deleteBook($id);
+    }
+
 
 
       // redirection
@@ -39,6 +44,13 @@ if(isset($_POST['update'])){
     $bookCon = new BookController();
     extract($_POST);
     $bookCon->update($id,$title,$author,$genre,$description,$year,$total_copies,$available_copies);
+    $bookCon->redirect("../../Views/admin/book/book.php");
+}
+
+if(isset($_POST['delete'])){
+    $bookCon = new BookController();
+    extract($_POST);
+    $bookCon->delete($id);
     $bookCon->redirect("../../Views/admin/book/book.php");
 }
 
