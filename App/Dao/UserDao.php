@@ -20,16 +20,24 @@ class UserDao
         $query = "INSERT INTO users (first_name,last_name,email,password,phone) VALUES (?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$user->getFirstName(),$user->getLastName(),$user->getEmail(),$user->getPassword(),$user->getphone()]);
+        $last_id = $this->conn->lastInsertId();
+        $sql = "INSERT INTO user_role (user_id, role_id) VALUES($last_id,2)";
+        $this->conn->exec($sql);
     }
 
-    public function getUserByEmail($email){
-        $query = "SELECT * from users where email=?";
+    public function getUserByEmail($email) {
+        $query = "SELECT u.id as id, u.first_name as first_name, u.last_name as last_name, u.email as email, u.password as password, u.phone as phone, ur.role_id as role_id
+            FROM users u
+            INNER JOIN user_role ur ON ur.user_id = u.id
+            WHERE u.email = ?";
+        
         $stmt = $this->conn->prepare($query);
-        // $stmt->bindValue(':email', $email);
         $stmt->execute([$email]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
         return $row;
     }
 }
+
 
 ?>

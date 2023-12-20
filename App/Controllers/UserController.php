@@ -91,13 +91,19 @@ class UserController
         if(empty($_SESSION['emailEr']) && empty($_SESSION['passwordErr'])){
             $userDao = new UserDao();
             $row = $userDao->getUserByEmail($email);
-            if($row){
-                if(password_verify($password, $row['password'])){
-                    $_SESSION['userId'] = $row['id'];
-                    $_SESSION['loggedIn'] = true;
-                    $this->redirect("../../index.php");
-                }
-            }else{
+            if($row) {
+                
+                    if(password_verify($password, $row['password'])){
+                            $_SESSION['userId'] = $row['id'];
+                            $_SESSION['loggedIn'] = true;
+
+                            if($row['role_id'] === 1){
+                                $this->redirect("../../Views/admin/dashboard.php");
+                            }else{
+                                $this->redirect("../../index.php");
+                            } 
+                    }
+            }else {
                 $_SESSION['message'] = "this email doesn't existe";
                 $this->redirect("../../Views/login.php");
             }
