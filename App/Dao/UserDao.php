@@ -34,7 +34,6 @@ class UserDao
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$email]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
         return $row;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 class Book 
 {
+    private $id;
     private $title;
     private $author;
     private $genre;
@@ -13,7 +14,8 @@ class Book
     private $available_copies;
 
 
-    public function __construct($title,$author,$genre,$description,$publication_year,$total_copies,$available_copies){
+    public function __construct($id,$title,$author,$genre,$description,$publication_year,$total_copies,$available_copies){
+        $this->id = $id;
         $this->title = $title;
         $this->author = $author;
         $this->genre = $genre;
@@ -26,6 +28,9 @@ class Book
 
     // getters
 
+    public function getId(){
+        return $this->id;
+    }
     public function getTitle(){
         return $this->title;
     }
@@ -56,6 +61,9 @@ class Book
 
     // setters
 
+    public function setId($id){
+        $this->id = $id;
+    }
     public function setTitle($title){
         $this->title = $title;
     }
