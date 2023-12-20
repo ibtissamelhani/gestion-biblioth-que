@@ -92,7 +92,7 @@ class UserController
             $userDao = new UserDao();
             $row = $userDao->getUserByEmail($email);
             if($row) {
-                
+
                     if(password_verify($password, $row['password'])){
                             $_SESSION['userId'] = $row['id'];
                             $_SESSION['loggedIn'] = true;
@@ -100,7 +100,7 @@ class UserController
                             if($row['role_id'] === 1){
                                 $this->redirect("../../Views/admin/dashboard.php");
                             }else{
-                                $this->redirect("../../index.php");
+                                $this->redirect("../../Views/user/home.php");
                             } 
                     }
             }else {

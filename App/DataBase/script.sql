@@ -31,12 +31,13 @@ CREATE TABLE reservation (
     description VARCHAR(500),
     reservation_date DATE,
     return_date DATE,
-    is_returned int ,
+    is_returned BOOLEAN,
     user_id int ,
     book_id int ,
     FOREIGN KEY (user_id) REFERENCES Users(id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES books(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 
 CREATE TABLE user_role (
     user_id int ,
