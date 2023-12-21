@@ -2,10 +2,13 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\Dao\BookDao;
+session_start();
 
 $id = $_GET['showId'];
 $bookDao = new BookDao();
 $row = $bookDao->getBookById($id);
+
+
 
 ?>
 
@@ -133,10 +136,10 @@ $row = $bookDao->getBookById($id);
                     <form class="p-4 md:p-5">
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
-                                <input type="hidden" name="user_id"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                                <input type="hidden" name="user_id"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  value="<?php echo $_SESSION['userId']?>">
                             </div>
                             <div class="col-span-2">
-                                <input type="hidden" name="book_id"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                                <input type="hidden" name="book_id"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?php echo $row['id']?>">
                             </div>
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="reservation_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">reservation_date</label>
