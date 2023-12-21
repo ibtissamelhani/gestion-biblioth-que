@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\Dao\BookDao;
+use App\Dao\UserDao;
 
 session_start();
 
@@ -39,18 +40,23 @@ $maxDate = date('Y-m-d', strtotime('+30 days'));
                 <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
               </button>
             </div>
+
+            <?php
+                $userDao = new UserDao();
+                $result = $userDao->getUserById($_SESSION['userId']);
+                ?>
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
               <div class="px-4 py-3" role="none">
                 <p class="text-sm text-gray-900 dark:text-white" role="none">
-                  Neil Sims
+                <?= $result['first_name'] .' '. $result['last_name']?>
                 </p>
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                  neil.sims@flowbite.com
+                <?= $result['email']?>
                 </p>
               </div>
               <ul class="py-1" role="none">
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">My reservation</a>
+                  <a href="UserReservation.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">My reservation</a>
                 </li>
                 <li>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
