@@ -81,13 +81,6 @@ class UserDao
         $stmt->execute();
     }
 
-    public function checkAvailabality($id){
-        $query = "SELECT * from books where id=? and available_copies > 0";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row;
-    }
 }
 
 
