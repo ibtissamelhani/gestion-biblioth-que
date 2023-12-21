@@ -12,13 +12,26 @@ class ReservationDao
     public function  __construct(){
         $this->conn = connection::connect();
     }
-    public function addResrvation(Reservation $res){
-        $query = "INSERT INTO reservation (reservation_date,return_date,description,is_returned,user_id,book_id) VALUES (:reservation_date,:return_date,:description,:is_returned,:user_id,:book_id)";
+
+    public function addReservation(Reservation $res) {
+        $query = "INSERT INTO reservation (description, reservation_date, return_date, is_returned, user_id, book_id) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$res->getReservationDate(),$res->getReturnDate(),$res->getDescription(),$res->getIsReturned(),$res->getUserId(),$res->getBookId()]);
+        $stmt->execute([
+                    $res->getDescription(),
+                    $res->getReservationDate(),
+                    $res->getReturnDate(),
+                    $res->getIsReturned(),
+                    $res->getUserId(),
+                    $res->getBookId()
+                ]);
+        $sql = "UPDATE books set available_copies= available_copies-1 where id =?";
+        $updateStmt = $this->conn->prepare($sql);
+        $updateStmt->execute([$res->getBookId()]);
+
+       
     }
 
-    
+
 }
 
 ?>
