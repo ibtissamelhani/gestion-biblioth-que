@@ -2,6 +2,16 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\Dao\BookDao;
+
+
+
+session_start();
+
+if (!isset($_SESSION['loggedIn']) || !$_SESSION['loggedIn']) {
+    header("location: ../login.php");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>

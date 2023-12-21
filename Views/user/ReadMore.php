@@ -2,13 +2,15 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\Dao\BookDao;
+
 session_start();
 
 $id = $_GET['showId'];
 $bookDao = new BookDao();
 $row = $bookDao->getBookById($id);
-
-
+$available = $bookDao-> checkAvailabality($id);
+// calc max date
+$maxDate = date('Y-m-d', strtotime('+30 days'));
 
 ?>
 
@@ -104,9 +106,15 @@ $row = $bookDao->getBookById($id);
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Reserve your favorite books today and embark on an exciting journey filled with captivating stories and knowledge.</p>
             <!-- Modal toggle -->
-            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-            Reserve
-            </button>   
+            <div class="flex gap-5">
+                <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" <?php if(!$available) echo 'disabled';?>>
+                Reserve
+                </button>
+                <button type="button" class="block text-white bg-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><a href="home.php">Cancel</a></button>
+
+            </div>
+         
+            <span class="text-rose-600"><?php if(!$available) echo 'this book is not availibale now';?></span>   
         </div>
 
                 <!-- Main modal -->
@@ -117,8 +125,7 @@ $row = $bookDao->getBookById($id);
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Make New Reservation
-                        </h3>
+                            Make New Reservation</h3>
                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -137,18 +144,18 @@ $row = $bookDao->getBookById($id);
                             </div>
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="reservation_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">reservation_date</label>
-                                <input type="date" name="reservation_date" id="reservation_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                                <input type="date" name="reservation_date" id="reservation_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required=""  min="<?php echo date('Y-m-d'); ?>">
                             </div>
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="return_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Return date</label>
-                                <input type="date" name="return_date" id="return_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                                <input type="date" name="return_date" id="return_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required=""  min="<?php echo date('Y-m-d'); ?>" max="<?php echo $maxDate; ?>">
                             </div>
                             <div class="col-span-2">
                                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                                 <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ></textarea>                    
                             </div>
                         </div>
-                        <button type="submit" name="reserve" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button type="submit" name="reserve" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" > 
                             <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                             Reserve
                         </button>

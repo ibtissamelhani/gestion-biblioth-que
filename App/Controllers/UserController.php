@@ -21,7 +21,7 @@ class UserController
             $userDao = new UserDao();
             $user = new User(null,$f_name,null,$email,$password,null);
             $userDao->creatUser($user); 
-            $this->redirect("../../index.php");
+            $this->redirect("../../Views/login.php");
         }
         else{
             $this->redirect("../../Views/register.php");
@@ -96,6 +96,7 @@ class UserController
                     if(password_verify($password, $row['password'])){
                             $_SESSION['userId'] = $row['id'];
                             $_SESSION['loggedIn'] = true;
+                            $_SESSION['role_id'] =$row['role_id'];
 
                             if($row['role_id'] === 1){
                                 $this->redirect("../../Views/admin/dashboard.php");

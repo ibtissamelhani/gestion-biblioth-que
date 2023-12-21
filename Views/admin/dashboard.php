@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['loggedIn']) || !$_SESSION['loggedIn'] || $_SESSION['role_id'] !== 1) {
+    header("location: ../login.php");
+    exit;
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
