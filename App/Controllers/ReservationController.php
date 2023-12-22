@@ -14,6 +14,11 @@ class ReservationController
         $resDao = new ReservationDao();
         $resDao->addReservation($res);
     }
+
+    public function update($res_id,$book_id){
+        $resDao = new ReservationDao();
+        $resDao->updateStatus($res_id,$book_id);
+    }
 }
 
 
@@ -22,6 +27,13 @@ if(isset($_POST['reserve'])){
     extract($_POST);
     $resCon->Add($description,$reservation_date,$return_date,false,$user_id,$book_id);
     header("location: ../../Views/user/ReadMore.php?showId=".$book_id);
+}
+
+if(isset($_POST['returnd'])){
+    $resCon = new ReservationController();
+    extract($_POST);
+    $resCon->update($res_id,$book_id);
+    header("location:../../Views/admin/reservation/reservations.php");
 }
 
 ?>
