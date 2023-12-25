@@ -25,7 +25,10 @@ class BookController
         $bookDao->deleteBook($id);
     }
 
-
+    public function search($title,$genre){
+        $bookDao = new BookDao();
+        $result = $bookDao->searchByTitleAndGenre($title, $genre);
+    }
 
       // redirection
       public function redirect($url) {

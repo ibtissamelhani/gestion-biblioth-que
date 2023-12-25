@@ -76,6 +76,18 @@ class BookDao
         return $row;
     }
 
+    public function searchByTitleAndGenre($title, $genre) {
+        $query = "SELECT * FROM books WHERE title LIKE :title AND genre = :genre";
+        
+        $stmt = $this->conn->prepare($query);
+        $title = '%' . $title . '%';
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':genre', $genre);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 
 ?>
